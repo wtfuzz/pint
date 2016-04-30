@@ -18,39 +18,42 @@ ARM_PREFIX=arm-none-eabi
 ARMCC=$ARM_PREFIX-gcc
 SIZE=$ARM_PREFIX-size
 
+CFLAGS=-O1
+
 echo "Defaults"
 ragel -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "T1"
 ragel -T1 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "F0"
 ragel -F0 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "F1"
 ragel -F1 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "G0"
 ragel -G0 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "G1"
 ragel -G1 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 echo "G2"
 ragel -G2 -o size_check.c pint.rl
-$ARMCC -O1 -c size_check.c
+$ARMCC $CFLAGS -c size_check.c
 $SIZE size_check.o
 
 rm size_check.c
+rm size_check.o
