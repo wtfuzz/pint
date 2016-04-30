@@ -3,10 +3,12 @@
 
 #include <inttypes.h>
 
+
 typedef uint16_t pint_length_t;
 
 typedef enum _pint_type_t
 {
+  PINT_TYPE_NULL,
   PINT_TYPE_STRING,
   PINT_TYPE_BINARY,
   PINT_TYPE_FLOAT,
@@ -19,6 +21,7 @@ typedef enum _pint_type_t
   PINT_TYPE_U16,
   PINT_TYPE_U32,
   PINT_TYPE_U64,
+  PINT_TYPE_BOOLEAN,
 } pint_type_t;
 
 /** @brief Pint Data Object container */
@@ -30,16 +33,17 @@ typedef struct _pint_object_t
   union {
     char *string;
     uint8_t *binary;
-    float *f;
-    double *d;
-    int8_t *s8;
-    int16_t *s16;
-    int32_t *s32;
-    int64_t *s64;
-    uint8_t *u8;
-    uint16_t *u16;
-    uint32_t *u32;
-    uint64_t *u64;
+    float f;
+    double d;
+    int8_t s8;
+    int16_t s16;
+    int32_t s32;
+    int64_t s64;
+    uint8_t u8;
+    uint16_t u16;
+    uint32_t u32;
+    uint64_t u64;
+    uint8_t boolean;
   };
 } pint_object_t;
 
@@ -57,6 +61,8 @@ typedef struct _pint_message_t
   pint_length_t value_count;
 } pint_message_t;
 
-int pint_parse(char *, pint_length_t);
+typedef void (*pint_callback_t)(char *key, uint8_t key_len, pint_object_t *obj);
+
+int pint_parse(char *, pint_length_t, pint_callback_t);
 
 #endif
